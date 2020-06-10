@@ -7,20 +7,21 @@ public class Material {
     private final double _kD;
     private final double _kS;
     private final int _nShininess;
+    public final static Material DEFAULT = new Material(0d,0d,0);
 
     // ****************************** Constructors *****************************//
 
     /**
      * Material constructor
      *
-     * @param _kD         kd
-     * @param _kS         ks
-     * @param _nShininess shininess
+     * @param kD         kd
+     * @param kS         ks
+     * @param nShininess shininess
      */
-    public Material(double _kD, double _kS, int _nShininess) {
-        this._kD = _kD;
-        this._kS = _kS;
-        this._nShininess = _nShininess;
+    public Material(double kD, double kS, int nShininess) {
+        this._kD = kD;
+        this._kS = kS;
+        this._nShininess = nShininess;
     }
 
     // ****************************** Getters *****************************//

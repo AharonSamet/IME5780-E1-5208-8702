@@ -19,14 +19,18 @@ public class Plane extends Geometry {
 
     // ****************************** Constructors *****************************/
 
+
     /**
-     * Plane constructor by 3 Points
+     * Plane constructor by 3 Points with color and material
      *
-     * @param p1 point3d
-     * @param p2 point3d
-     * @param p3 point3d
+     * @param material material
+     * @param emission emission
+     * @param p1       point3d
+     * @param p2       point3d
+     * @param p3       point3d
      */
-    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+    public Plane(Material material, Color emission, Point3D p1, Point3D p2, Point3D p3) {
+        super(emission, material);
         Vector vec1 = new Vector(p2.subtract(p1));
         Vector vec2 = new Vector(p3.subtract(p1));
         this._normal = vec1.crossProduct(vec2).normalize();
@@ -36,66 +40,62 @@ public class Plane extends Geometry {
     /**
      * Plane constructor by 3 Points and color
      *
-     * @param _emission emission
-     * @param p1        point3d
-     * @param p2        point3d
-     * @param p3        point3d
+     * @param emission emission
+     * @param p1       point3d
+     * @param p2       point3d
+     * @param p3       point3d
      */
-    public Plane(Color _emission, Point3D p1, Point3D p2, Point3D p3) {
-        this(p1, p2, p3);
-        this._emission = _emission;
+    public Plane(Color emission, Point3D p1, Point3D p2, Point3D p3) {
+        this(Material.DEFAULT, emission, p1, p2, p3);
     }
 
     /**
-     * Plane constructor by 3 Points with color and material
+     * Plane constructor by 3 Points
      *
-     * @param _material material
-     * @param _emission emission
-     * @param p1        point3d
-     * @param p2        point3d
-     * @param p3        point3d
+     * @param p1 point3d
+     * @param p2 point3d
+     * @param p3 point3d
      */
-    public Plane(Material _material, Color _emission, Point3D p1, Point3D p2, Point3D p3) {
-        this(_emission, p1, p2, p3);
-        this._material = _material;
+    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+        this(Color.BLACK, p1, p2, p3);
+    }
+
+//    =============================================================================================
+
+    /**
+     * Plane constructor by normal and point with color and material
+     *
+     * @param material material
+     * @param emission emission
+     * @param point3D  point
+     * @param normal   normal
+     */
+    public Plane(Material material, Color emission, Point3D point3D, Vector normal) {
+        super(emission, material);
+        _p = point3D;
+        _normal = normal;
+    }
+
+    /**
+     * Plane constructor by normal and point and color
+     *
+     * @param emission emission
+     * @param point3D  point
+     * @param normal   normal
+     */
+    public Plane(Color emission, Point3D point3D, Vector normal) {
+        this(Material.DEFAULT, emission, point3D, normal);
     }
 
     /**
      * Plane constructor by normal and point
      *
      * @param point3D point
-     * @param _normal normal
+     * @param normal  normal
      */
-    public Plane(Point3D point3D, Vector _normal) {
-        this._p = point3D;
-        this._normal = _normal;
+    public Plane(Point3D point3D, Vector normal) {
+        this(Color.BLACK, point3D, normal);
     }
-
-    /**
-     * Plane constructor by normal and point and color
-     *
-     * @param _emission _emission
-     * @param point3D   point
-     * @param _normal   normal
-     */
-    public Plane(Color _emission, Point3D point3D, Vector _normal) {
-        this(point3D, _normal);
-        this._emission = _emission;
-    }
-
-    /**
-     * Plane constructor by normal and point with color and material
-     *
-     * @param _material material
-     * @param _emission _emission
-     * @param point3D   point
-     * @param _normal   normal
-     */
-    public Plane(Material _material, Color _emission, Point3D point3D, Vector _normal) {
-        this(_emission, point3D, _normal);
-        this._material = _material;
-    }
-
 
     //****************************** Getters *****************************/
 

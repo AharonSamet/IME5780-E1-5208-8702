@@ -12,15 +12,15 @@ public class SpotLightImproved extends SpotLight {
     /**
      * constructor
      *
-     * @param _colorIntensity colorIntensity
-     * @param _position       position
-     * @param _direction      direction
-     * @param _kC             kc
-     * @param _kL             kl
-     * @param _kQ             kq
+     * @param colorIntensity colorIntensity
+     * @param position       position
+     * @param direction      direction
+     * @param kC             kc
+     * @param kL             kl
+     * @param kQ             kq
      */
-    public SpotLightImproved(Color _colorIntensity, Point3D _position, Vector _direction, double _kC, double _kL, double _kQ, double _concentration) {
-        super(_colorIntensity, _position, _direction, _kC, _kL, _kQ,_concentration);
+    public SpotLightImproved(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ, double _concentration) {
+        super(colorIntensity, position, direction, kC, kL, kQ,_concentration);
     }
 
     @Override

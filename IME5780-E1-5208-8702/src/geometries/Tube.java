@@ -18,39 +18,37 @@ public class Tube extends RadialGeometry {
     //****************************** Constructors *****************************/
 
     /**
-     * Tube constructor
+     * tube constructor with color and material
      *
-     * @param _radius  radius
-     * @param _axisRay Ray
+     * @param material material
+     * @param emission emission
+     * @param radius   radius
+     * @param axisRay  axis ray
      */
-    public Tube(Double _radius, Ray _axisRay) {
-        super(_radius);
-        this._axisRay = _axisRay;
+    public Tube(Material material, Color emission, double radius, Ray axisRay) {
+        super(material,emission,radius);
+        _axisRay=axisRay;
     }
 
     /**
      * tube constructor with color
      *
-     * @param _emission emission
-     * @param _radius   radius
-     * @param _axisRay  axis ray
+     * @param emission emission
+     * @param radius   radius
+     * @param axisRay  axis ray
      */
-    public Tube(Color _emission, double _radius, Ray _axisRay) {
-        this(_radius, _axisRay);
-        this._emission = _emission;
+    public Tube(Color emission, double radius, Ray axisRay) {
+        this(Material.DEFAULT,emission,radius,axisRay);
     }
 
     /**
-     * tube constructor with color and material
+     * Tube constructor
      *
-     * @param _material material
-     * @param _emission emission
-     * @param _radius   radius
-     * @param _axisRay  axis ray
+     * @param radius  radius
+     * @param axisRay Ray
      */
-    public Tube(Material _material, Color _emission, double _radius, Ray _axisRay) {
-        this(_emission, _radius, _axisRay);
-        this._material = _material;
+    public Tube(Double radius, Ray axisRay) {
+        this(Color.BLACK,radius,axisRay);
     }
 
     // ****************************** Getters *****************************/

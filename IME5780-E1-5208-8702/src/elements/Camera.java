@@ -23,16 +23,16 @@ public class Camera {
     /**
      * constructor for camera with params
      *
-     * @param _place place of camera
-     * @param _vto   forward vector
-     * @param _vup   up vector
+     * @param place place of camera
+     * @param vto   forward vector
+     * @param vup   up vector
      */
-    public Camera(Point3D _place, Vector _vto, Vector _vup) {
-        if (isZero(_vto.dotProduct(_vup))) {
-            place = _place;
-            vto = _vto.normalized();
-            vup = _vup.normalized();
-            vright = new Vector(_vto.crossProduct(_vup));
+    public Camera(Point3D place, Vector vto, Vector vup) {
+        if (isZero(vto.dotProduct(vup))) {
+            this.place = place;
+            this.vto = vto.normalized();
+            this.vup = vup.normalized();
+            vright = new Vector(vto.crossProduct(vup));
         } else
             throw new IllegalArgumentException("Illegal args");
     }

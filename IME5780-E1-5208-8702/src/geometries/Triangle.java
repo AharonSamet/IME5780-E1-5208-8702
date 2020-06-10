@@ -31,28 +31,28 @@ public class Triangle extends Polygon {
     /**
      * triangle constructor with color
      *
-     * @param _emission emission color
+     * @param emission emission color
      * @param p1        ver of triangle
      * @param p2        ver of triangle
      * @param p3        ver of triangle
      */
-    public Triangle(Color _emission, Point3D p1, Point3D p2, Point3D p3) {
+    public Triangle(Color emission, Point3D p1, Point3D p2, Point3D p3) {
         this(p1, p2, p3);
-        this._emission = _emission;
+        this._emission = emission;
     }
 
     /**
      * triangle constructor with color and material
      *
-     * @param _material material
-     * @param _emission emission color
+     * @param material material
+     * @param emission emission color
      * @param p1        ver of triangle
      * @param p2        ver of triangle
      * @param p3        ver of triangle
      */
-    public Triangle(Color _emission, Material _material, Point3D p1, Point3D p2, Point3D p3) {
-        this(_emission, p1, p2, p3);
-        this._material = _material;
+    public Triangle(Color emission, Material material, Point3D p1, Point3D p2, Point3D p3) {
+        this(emission, p1, p2, p3);
+        this._material = material;
     }
 
     // ****************************** Overrides *****************************//

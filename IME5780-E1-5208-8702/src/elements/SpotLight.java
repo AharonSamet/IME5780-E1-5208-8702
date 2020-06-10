@@ -19,32 +19,32 @@ public class SpotLight extends PointLight {
     /**
      * constructor spot light with concentration
      *
-     * @param _intensity     intensity
-     * @param _position      position
-     * @param _direction     direction
-     * @param _kC            kc
-     * @param _kL            kl
-     * @param _kQ            kq
-     * @param _concentration concentration
+     * @param intensity     intensity
+     * @param position      position
+     * @param direction     direction
+     * @param kC            kc
+     * @param kL            kl
+     * @param kQ            kq
+     * @param concentration concentration
      */
-    public SpotLight(Color _intensity, Point3D _position, Vector _direction, double _kC, double _kL, double _kQ, double _concentration) {
-        super(_intensity, _position, _kC, _kL, _kQ);
-        this._direction = new Vector(_direction).normalized();
-        this._concentration = _concentration;
+    public SpotLight(Color intensity, Point3D position, Vector direction, double kC, double kL, double kQ, double concentration) {
+        super(intensity, position, kC, kL, kQ);
+        this._direction = new Vector(direction).normalized();
+        this._concentration = concentration;
     }
 
     /**
      * constructor spot light
      *
-     * @param _intensity intensity
-     * @param _position  position
-     * @param _direction direction
-     * @param _kC        kc
-     * @param _kL        kl
-     * @param _kQ        kq
+     * @param intensity intensity
+     * @param position  position
+     * @param direction direction
+     * @param kC        kc
+     * @param kL        kl
+     * @param kQ        kq
      */
-    public SpotLight(Color _intensity, Point3D _position, Vector _direction, double _kC, double _kL, double _kQ) {
-        this(_intensity, _position, _direction, _kC, _kL, _kQ, 1);
+    public SpotLight(Color intensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
+        this(intensity, position, direction, kC, kL, kQ, 1);
     }
 
     // ****************************** Overrides *****************************//

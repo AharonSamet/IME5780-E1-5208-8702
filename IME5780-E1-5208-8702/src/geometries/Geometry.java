@@ -15,32 +15,30 @@ public abstract class Geometry implements Intersectable {
     //****************************** Constructors *****************************/
 
     /**
-     * default constructor for Geometry
+     * constructor for Geometry with color and material
+     *
+     * @param emission emission
+     * @param material material
      */
-    public Geometry() {
-        this._emission = Color.BLACK;
-        _material=new Material(0,0,0);
+    public Geometry(Color emission, Material material) {
+        _emission = emission;
+        _material = material;
     }
 
     /**
      * constructor for Geometry
      *
-     * @param _emission emission
+     * @param emission emission
      */
-    public Geometry(Color _emission) {
-        this._emission = _emission;
-        _material=new Material(0,0,0);
+    public Geometry(Color emission) {
+        this(emission, Material.DEFAULT);
     }
 
     /**
-     * constructor for Geometry with color and material
-     *
-     * @param _emission emission
-     * @param _material material
+     * default constructor for Geometry
      */
-    public Geometry(Color _emission, Material _material) {
-        this(_emission);
-        this._material = _material;
+    public Geometry() {
+        this(Color.BLACK);
     }
 
     // ****************************** Getters *****************************//

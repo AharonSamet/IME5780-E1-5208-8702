@@ -11,25 +11,17 @@ import java.util.List;
  */
 public class Geometries implements Intersectable {
     // hold the collect of the geometries
-    private List<Intersectable> listOfGeometries;
+    private List<Intersectable> listOfGeometries= new LinkedList<>();
 
     // ****************************** Constructors *****************************/
 
     /**
-     * Geometries def constructor
-     */
-    public Geometries() {
-        this.listOfGeometries = new LinkedList<>();
-    }
-
-    /**
      * Geometries constructor
      *
-     * @param _geometries .
+     * @param geometries geometries
      */
-    public Geometries(Intersectable... _geometries) {
-        listOfGeometries = new LinkedList<>();
-        add(_geometries);
+    public Geometries(Intersectable... geometries) {
+        add(geometries);
     }
 
     // ****************************** Functions *****************************//
@@ -37,10 +29,10 @@ public class Geometries implements Intersectable {
     /**
      * add geometry to list
      *
-     * @param _geometries
+     * @param geometries
      */
-    public void add(Intersectable... _geometries) {
-        this.listOfGeometries.addAll(Arrays.asList(_geometries));
+    public void add(Intersectable... geometries) {
+        this.listOfGeometries.addAll(Arrays.asList(geometries));
     }
 
     // ****************************** Overrides *****************************//

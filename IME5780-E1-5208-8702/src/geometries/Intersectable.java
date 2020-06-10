@@ -23,12 +23,12 @@ public interface Intersectable {
         /**
          * GeoPoint constructor
          *
-         * @param _geometry geometry
-         * @param _point    point
+         * @param geometry geometry
+         * @param point    point
          */
-        public GeoPoint(Geometry _geometry, Point3D _point) {
-            this.geometry = _geometry;
-            this.point = _point;
+        public GeoPoint(Geometry geometry, Point3D point) {
+            this.geometry = geometry;
+            this.point = point;
         }
 
         // ****************************** Overrides *****************************//

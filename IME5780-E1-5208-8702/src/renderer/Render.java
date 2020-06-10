@@ -3,7 +3,7 @@ package renderer;
 import elements.LightSource;
 import geometries.Intersectable.GeoPoint;
 import elements.Camera;
-import geometries.Intersectable;
+import geometries.*;
 import primitives.*;
 import scene.Scene;
 
@@ -24,12 +24,12 @@ public class Render {
     /**
      * constructor render
      *
-     * @param _imageWriter imageWriter object
-     * @param _scene       the scene to rend
+     * @param imageWriter imageWriter object
+     * @param scene       the scene to rend
      */
-    public Render(ImageWriter _imageWriter, Scene _scene) {
-        this._imageWriter = _imageWriter;
-        this._scene = _scene;
+    public Render(ImageWriter imageWriter, Scene scene) {
+        this._imageWriter = imageWriter;
+        this._scene = scene;
     }
 
     /**

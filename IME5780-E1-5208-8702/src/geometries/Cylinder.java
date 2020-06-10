@@ -16,45 +16,43 @@ import static primitives.Util.isZero;
 public class Cylinder extends Tube {
     private Double _height;
 
-    //****************************** Constructors *****************************/
 
+    //****************************** Constructors *****************************/
     /**
-     * Cylinder constructor
+     * Cylinder constructor with color and material
      *
-     * @param _radius radius
-     * @param _ray    ray
-     * @param _height the height
+     * @param material material
+     * @param emission emission
+     * @param radius    radius
+     * @param ray       ray
+     * @param height   the height
      */
-    public Cylinder(Double _radius, Ray _ray, Double _height) {
-        super(_radius, _ray);
-        this._height = _height;
+    public Cylinder(Material material, Color emission, double radius, Ray ray, double height) {
+       super(material,emission,radius,ray);
+       _height=height;
     }
 
     /**
      * Cylinder constructor with color
      *
-     * @param _emission emission
+     * @param emission emission
      * @param radius    radius
      * @param ray       ray
-     * @param _height   the height
+     * @param height   the height
      */
-    public Cylinder(Color _emission, double radius, Ray ray, double _height) {
-        this(radius, ray, _height);
-        this._emission = _emission;
+    public Cylinder(Color emission, double radius, Ray ray, double height) {
+       this(Material.DEFAULT,emission,radius,ray,height);
     }
 
     /**
-     * Cylinder constructor with color and material
+     * Cylinder constructor
      *
-     * @param _material material
-     * @param _emission emission
-     * @param radius    radius
-     * @param ray       ray
-     * @param _height   the height
+     * @param radius radius
+     * @param ray    ray
+     * @par9am height the height
      */
-    public Cylinder(Material _material, Color _emission, double radius, Ray ray, double _height) {
-        this(_emission, radius, ray, _height);
-        this._material = _material;
+    public Cylinder(Double radius, Ray ray, Double height) {
+       this(Color.BLACK,radius,ray,height);
     }
 
 

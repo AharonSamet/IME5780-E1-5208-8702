@@ -14,10 +14,10 @@ abstract class Light {
     /**
      * light constructor
      *
-     * @param _intensity intensity
+     * @param intensity intensity
      */
-    public Light(Color _intensity) {
-        this._intensity = _intensity;
+    public Light(Color intensity) {
+        _intensity = intensity;
     }
 
     /**

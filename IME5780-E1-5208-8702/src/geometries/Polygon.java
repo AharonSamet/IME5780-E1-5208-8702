@@ -83,25 +83,27 @@ public class Polygon extends Geometry {
     }
 
     /**
-     * polygon constructor with color
+     * polygon constructor with color and material
      *
-     * @param _emission emission
+     * @param material material
+     * @param emission emission
      * @param vertices vertices
      */
-    public Polygon(Color _emission, Point3D... vertices) {
+    public Polygon(Material material, Color emission, Point3D... vertices) {
         this(vertices);
-        this._emission = _emission;
+        _material = material;
+        _emission = emission;
+
     }
 
     /**
-     * polygon constructor with color and material
+     * polygon constructor with color
      *
-     * @param _emission emission
+     * @param emission emission
      * @param vertices vertices
      */
-    public Polygon(Material _material, Color _emission, Point3D... vertices) {
-        this(_emission, vertices);
-        this._material = _material;
+    public Polygon(Color emission, Point3D... vertices) {
+        this(Material.DEFAULT, emission, vertices);
     }
 
     // ****************************** Overrides *****************************//
