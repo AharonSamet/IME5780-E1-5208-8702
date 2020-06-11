@@ -19,6 +19,10 @@ import static primitives.Util.alignZero;
 public class Render {
     private ImageWriter _imageWriter;
     private Scene _scene;
+    /**
+     * const to use with move rays head for shadow rays
+     */
+    private static final double DELTA = 0.1;
 
     // ********************** Constructors ********************** //
 
@@ -31,6 +35,23 @@ public class Render {
     public Render(ImageWriter imageWriter, Scene scene) {
         this._imageWriter = imageWriter;
         this._scene = scene;
+    }
+
+    /**
+     * check if have shadow or not
+     *
+     * @param l  light vector
+     * @param n  normal vector
+     * @param gp geoPoint
+     * @return pos/neg
+     */
+    private boolean unshaded(Vector l, Vector n, GeoPoint gp, LightSource lightSource) {
+        Vector lightDirection = l.scale(-1); // d from point to light source
+        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
+        Point3D point = gp.point.add(delta);
+        Ray lightRay = new Ray(point, lightDirection);
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        return intersections == null; //return true if not have shadow
     }
 
     /**
@@ -81,8 +102,7 @@ public class Render {
                 Vector l = lightSource.getL(_intersection.point);
                 double nl = alignZero(n.dotProduct(l));
                 double nv = alignZero(n.dotProduct(v));
-
-                if (nl * nv > 0) {
+                if (nl * nv > 0 && unshaded(l, n, _intersection, lightSource)) {
                     Color ip = lightSource.getIntensity(_intersection.point);
                     result = result.add(
                             calcDiffusive(kd, nl, ip),
@@ -154,8 +174,8 @@ public class Render {
      */
     private Color calcSpecular(double ks, Vector l, Vector n, double nl, Vector v, int nShininess, Color ip) {
         double p = nShininess;
-        Vector R = l.add(n.scale(-2 * nl));
-        double minusVR = -alignZero(R.dotProduct(v));
+        Vector r = l.add(n.scale(-2 * nl));
+        double minusVR = -alignZero(r.dotProduct(v));
         if (minusVR <= 0)
             return Color.BLACK;
         return ip.scale(ks * Math.pow(minusVR, p));

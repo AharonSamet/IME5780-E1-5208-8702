@@ -10,6 +10,14 @@ import primitives.Vector;
 public interface LightSource {
 
     /**
+     * get the distance between the point and light source
+     *
+     * @param point point
+     * @return d from point to light source
+     */
+    public double getDistance(Point3D point);
+
+    /**
      * get intensity func
      *
      * @param p point
@@ -25,5 +33,6 @@ public interface LightSource {
      * @return vector color
      */
     public Vector getL(Point3D p);
+
 
 }

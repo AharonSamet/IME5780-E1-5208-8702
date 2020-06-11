@@ -10,7 +10,20 @@ import java.util.Objects;
  * interface Intersectable for all intersectable objects
  */
 public interface Intersectable {
-    List<GeoPoint> findIntersections(Ray ray);
+
+    default List<GeoPoint> findIntersections(Ray ray) {
+        return findIntersections(ray, Double.POSITIVE_INFINITY);
+    }
+
+    /**
+     * filter shadow not in the other side
+     *
+     * @param ray ray
+     * @param max max of the dist
+     * @return the geo point closest
+     */
+    List<GeoPoint> findIntersections(Ray ray, double max);
+
 
     /**
      * static class Geo Point
@@ -40,8 +53,7 @@ public interface Intersectable {
             if (o == null) return false;
             if (!(o instanceof GeoPoint)) return false;
             GeoPoint geoPoint = (GeoPoint) o;
-            return Objects.equals(geometry, geoPoint.geometry) &&
-                    Objects.equals(point, geoPoint.point);
+            return geometry == geoPoint.geometry && point.equals(geoPoint.point);
         }
 
     }
