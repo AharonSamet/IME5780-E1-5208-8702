@@ -21,6 +21,7 @@ public class Render {
     private Scene _scene;
 
     // ********************** Constructors ********************** //
+
     /**
      * constructor render
      *
@@ -81,7 +82,7 @@ public class Render {
                 double nl = alignZero(n.dotProduct(l));
                 double nv = alignZero(n.dotProduct(v));
 
-                if (sign(nl) == sign(nv)) {
+                if (nl * nv > 0) {
                     Color ip = lightSource.getIntensity(_intersection.point);
                     result = result.add(
                             calcDiffusive(kd, nl, ip),
@@ -100,8 +101,8 @@ public class Render {
      */
     public void printGrid(int _interval, java.awt.Color _color) {
         //i = row, j = columns on the image (Nx X Ny)
-        for (int i = 0; i < this._imageWriter.getNx(); ++i)
-            for (int j = 0; j < this._imageWriter.getNy(); ++j) {
+        for (int i = 0; i < this._imageWriter.getNy(); ++i)
+            for (int j = 0; j < this._imageWriter.getNx(); ++j) {
                 if (j % _interval == 0 || i % _interval == 0)
                     _imageWriter.writePixel(j, i, _color);
             }
@@ -124,8 +125,8 @@ public class Render {
         double distance = _scene.getDistance();
 
         Ray ray;
-        for (int i = 0; i < nX; ++i)
-            for (int j = 0; j < nY; ++j) {
+        for (int i = 0; i < nY; ++i)
+            for (int j = 0; j < nX; ++j) {
                 //creating a new ray for every pixel
                 ray = camera.constructRayThroughPixel(nX, nY, j, i, distance, width, height);
                 List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
@@ -138,7 +139,6 @@ public class Render {
                 }
             }
     }
-
 
     /**
      * Calculate Specular
@@ -183,9 +183,4 @@ public class Render {
     public void writeToImage() {
         _imageWriter.writeToImage();
     }
-
-    private boolean sign(double val) {
-        return (val > 0d);
-    }
-
 }

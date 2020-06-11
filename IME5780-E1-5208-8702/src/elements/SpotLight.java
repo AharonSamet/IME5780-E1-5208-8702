@@ -5,6 +5,7 @@ import primitives.Point3D;
 import primitives.Util;
 import primitives.Vector;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -51,18 +52,12 @@ public class SpotLight extends PointLight {
 
     @Override
     public Color getIntensity(Point3D p) {
-        double projection = _direction.dotProduct(getL(p));
-        if (Util.isZero(projection))
+        Vector projection = getL(p);
+        if (projection == null)
+            projection = _direction;
+        double cos = alignZero(projection.dotProduct(_direction));
+        if (cos <= 0)
             return Color.BLACK;
-        double factor = Math.max(0, projection);
-        Color pointLightIntensity = super.getIntensity(p);
-        if (_concentration != 1)
-            factor = Math.pow(factor, _concentration);
-        return (pointLightIntensity.scale(factor));
-    }
-
-    @Override
-    public Vector getL(Point3D p) {
-        return super.getL(p);
+        return super.getIntensity(p).scale(cos);
     }
 }

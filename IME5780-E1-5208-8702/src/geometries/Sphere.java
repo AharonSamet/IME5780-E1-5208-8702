@@ -19,13 +19,16 @@ public class Sphere extends RadialGeometry {
     //****************************** Constructors *****************************/
 
     /**
-     * Sphere constructor
+     * Sphere constructor with color and material
      *
-     * @param radius radius value
-     * @param center point
+     * @param material      material
+     * @param emissionLight emission color
+     * @param radius        radius
+     * @param center        center
      */
-    public Sphere(Double radius, Point3D center) {
-       this(Color.BLACK,radius,center);
+    public Sphere(Color emissionLight, Material material, double radius, Point3D center) {
+        super(material, emissionLight, radius);
+        _center = center;
     }
 
     /**
@@ -36,20 +39,17 @@ public class Sphere extends RadialGeometry {
      * @param center   center
      */
     public Sphere(Color emission, double radius, Point3D center) {
-       this(emission,Material.DEFAULT,radius,center);
+        this(emission, Material.DEFAULT, radius, center);
     }
 
     /**
-     * Sphere constructor with color and material
+     * Sphere constructor
      *
-     * @param material      material
-     * @param emissionLight emission color
-     * @param radius        radius
-     * @param center        center
+     * @param radius radius value
+     * @param center point
      */
-    public Sphere(Color emissionLight, Material material, double radius, Point3D center) {
-        super(material,emissionLight,radius);
-        _center=center;
+    public Sphere(Double radius, Point3D center) {
+        this(Color.BLACK, radius, center);
     }
 
 //****************************** Getters *****************************/

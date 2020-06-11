@@ -19,6 +19,7 @@ public interface LightSource {
 
     /**
      * get lights func
+     * p can not be equals to _position
      *
      * @param p point
      * @return vector color

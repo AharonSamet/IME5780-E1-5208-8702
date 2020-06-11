@@ -4,6 +4,7 @@ import primitives.Point3D;
 import primitives.Ray;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * interface Intersectable for all intersectable objects
@@ -39,8 +40,9 @@ public interface Intersectable {
             if (o == null) return false;
             if (!(o instanceof GeoPoint)) return false;
             GeoPoint geoPoint = (GeoPoint) o;
-            return geometry.equals(geoPoint.geometry)
-                    && point.equals(geoPoint.point);
+            return Objects.equals(geometry, geoPoint.geometry) &&
+                    Objects.equals(point, geoPoint.point);
         }
+
     }
 }

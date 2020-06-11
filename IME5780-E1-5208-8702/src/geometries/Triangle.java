@@ -18,6 +18,31 @@ public class Triangle extends Polygon {
     //****************************** Constructors *****************************/
 
     /**
+     * triangle constructor with color and material
+     *
+     * @param material material
+     * @param emission emission color
+     * @param p1       ver of triangle
+     * @param p2       ver of triangle
+     * @param p3       ver of triangle
+     */
+    public Triangle(Color emission, Material material, Point3D p1, Point3D p2, Point3D p3) {
+        super(material, emission, p1, p2, p3);
+    }
+
+    /**
+     * triangle constructor with color
+     *
+     * @param emission emission color
+     * @param p1       ver of triangle
+     * @param p2       ver of triangle
+     * @param p3       ver of triangle
+     */
+    public Triangle(Color emission, Point3D p1, Point3D p2, Point3D p3) {
+        this(emission, Material.DEFAULT, p1, p2, p3);
+    }
+
+    /**
      * Triangle constructor by super
      *
      * @param p1 one point
@@ -25,34 +50,7 @@ public class Triangle extends Polygon {
      * @param p3 one point
      */
     public Triangle(Point3D p1, Point3D p2, Point3D p3) {
-        super(p1, p2, p3);
-    }
-
-    /**
-     * triangle constructor with color
-     *
-     * @param emission emission color
-     * @param p1        ver of triangle
-     * @param p2        ver of triangle
-     * @param p3        ver of triangle
-     */
-    public Triangle(Color emission, Point3D p1, Point3D p2, Point3D p3) {
-        this(p1, p2, p3);
-        this._emission = emission;
-    }
-
-    /**
-     * triangle constructor with color and material
-     *
-     * @param material material
-     * @param emission emission color
-     * @param p1        ver of triangle
-     * @param p2        ver of triangle
-     * @param p3        ver of triangle
-     */
-    public Triangle(Color emission, Material material, Point3D p1, Point3D p2, Point3D p3) {
-        this(emission, p1, p2, p3);
-        this._material = material;
+        this(Color.BLACK, p1, p2, p3);
     }
 
     // ****************************** Overrides *****************************//
