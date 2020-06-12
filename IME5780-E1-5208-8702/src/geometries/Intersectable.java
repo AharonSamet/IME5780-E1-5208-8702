@@ -19,10 +19,10 @@ public interface Intersectable {
      * filter shadow not in the other side
      *
      * @param ray ray
-     * @param max max of the dist
+     * @param maxDistance max of the dist
      * @return the geo point closest
      */
-    List<GeoPoint> findIntersections(Ray ray, double max);
+    List<GeoPoint> findIntersections(Ray ray, double maxDistance);
 
 
     /**

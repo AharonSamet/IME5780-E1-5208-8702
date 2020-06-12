@@ -112,7 +112,7 @@ public class Polygon extends Geometry {
     }
 
     @Override
-    public List<GeoPoint> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
         List<GeoPoint> intersection = _plane.findIntersections(ray);
         if (intersection == null)
             return null;
@@ -128,8 +128,10 @@ public class Polygon extends Geometry {
             v1 = v2;
             v2 = _vertices.get(i).subtract(p0);
             sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
-            if (isZero(sign)) return null;
-            if (positive != (sign > 0)) return null;
+            if (isZero(sign))
+                return null;
+            if (positive != (sign > 0))
+                return null;
         }
         intersection.get(0).geometry = this;
         return intersection;
