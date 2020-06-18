@@ -24,8 +24,8 @@ public class Ray {
     public Ray(Point3D p0, Vector dir, Vector n) {
         _dir = dir.normalized();
         double nv = n.dotProduct(dir);
-        Vector normalDelta = n.scale((nv > 0 ? DELTA : -DELTA));
-        _p0 = p0.add(normalDelta);
+        Vector delta = n.scale((nv > 0 ? DELTA : -DELTA));
+        _p0 = p0.add(delta);
     }
 
     /**
