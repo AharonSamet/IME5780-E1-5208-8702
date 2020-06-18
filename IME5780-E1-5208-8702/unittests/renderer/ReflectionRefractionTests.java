@@ -1,5 +1,6 @@
 package renderer;
 
+import geometries.Cylinder;
 import org.junit.Test;
 
 import elements.*;
@@ -105,7 +106,6 @@ public class ReflectionRefractionTests {
 
 	/**
 	 * Produce a picture of a two triangles with 4 spheres in varios colors
-	 *
 	 */
 	@Test
 	public void OurImage() {
