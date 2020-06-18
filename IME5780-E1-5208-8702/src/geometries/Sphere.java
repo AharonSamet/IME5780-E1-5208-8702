@@ -98,10 +98,12 @@ public class Sphere extends RadialGeometry {
         double t2 = alignZero(tm + th);
         if (t1 <= 0 && t2 <= 0)
             return null;
-        if (t1 > 0 && t2 > 0)
+        if (t1 > 0 && t2 > 0 && t1 - maxDistance <= 0 && t2 - maxDistance <= 0)
             return List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
-        if (t1 > 0)
+        if (t1 > 0 && t1 - maxDistance <= 0)
             return List.of(new GeoPoint(this, ray.getPoint(t1)));
+        if (t2 - maxDistance > 0)
+            return null;
         return List.of(new GeoPoint(this, ray.getPoint(t2)));
     }
 }

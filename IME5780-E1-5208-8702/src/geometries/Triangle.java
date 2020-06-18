@@ -57,7 +57,7 @@ public class Triangle extends Polygon {
 
     @Override
     public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
-        List<GeoPoint> intersections = _plane.findIntersections(ray);
+        List<GeoPoint> intersections = _plane.findIntersections(ray, maxDistance);
         if (intersections == null)
             return null;
         Point3D p0 = ray.getP0();
@@ -76,9 +76,11 @@ public class Triangle extends Polygon {
         if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
             List<GeoPoint> result = new ArrayList<>();
             for (GeoPoint geo : intersections) {
-                geo.geometry = this;
+                if (s1 - maxDistance <= 0 && s2 - maxDistance <= 0 && s3 - maxDistance <= 0)
+                    result.add(new GeoPoint(this, geo.point));
             }
-            return intersections;
+            //result.get(0).geometry = this;
+            return result;
         }
         return null;
     }

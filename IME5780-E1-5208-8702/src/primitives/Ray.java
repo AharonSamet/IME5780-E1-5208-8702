@@ -8,20 +8,37 @@ import static primitives.Util.isZero;
  * @author AhronS, IsraelN
  */
 public class Ray {
+    private static final double DELTA = 0.1;
     private final Point3D _p0;
     private final Vector _dir;
 
     // ****************************** Constructors *****************************/
 
     /**
+     * Ray constructor with light dir
+     *
+     * @param p0  point
+     * @param dir light dir
+     * @param n   normal
+     */
+    public Ray(Point3D p0, Vector dir, Vector n) {
+        _dir = dir.normalized();
+        double nv = n.dotProduct(dir);
+        Vector normalDelta = n.scale((nv > 0 ? DELTA : -DELTA));
+        _p0 = p0.add(normalDelta);
+    }
+
+    /**
      * Ray constructor receiving a 2 value
      *
-     * @param _p0  as Point3D
-     * @param _dir as Vector
+     * @param p0  as Point3D
+     * @param dir as Vector
      */
-    public Ray(Point3D _p0, Vector _dir) {
-        this._p0 = _p0;
-        this._dir = _dir.normalized();
+    public Ray(Point3D p0, Vector dir) {
+        //ask the Doctor!!!!!
+        //this(p0, dir, null);
+        this._p0 = p0;
+        this._dir = dir.normalized();
     }
 
     /**
@@ -34,7 +51,7 @@ public class Ray {
         this._dir = other._dir.normalized();
     }
 
-    // ****************************** Getters *****************************/
+    /****************************** Getters *****************************/
 
     /**
      * Ray getter value

@@ -152,7 +152,7 @@ public class Plane extends Geometry {
         double t = alignZero(_normal.dotProduct(p0Q) / nv);
         if (t <= 0)
             return null;
-        if (alignZero(maxDistance-t)<0)
+        if (alignZero(t - maxDistance) > 0) //== t>maxDistance
             return null;
         return List.of(new GeoPoint(this, p0.add(v.scale(t))));
     }

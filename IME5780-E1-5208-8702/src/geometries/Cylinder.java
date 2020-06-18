@@ -95,12 +95,13 @@ public class Cylinder extends Tube {
     }
 
     @Override
-    public List<GeoPoint> findIntersections(Ray ray) {
-        List<GeoPoint> intersections = super.findIntersections(ray);
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
+        List<GeoPoint> intersections = super.findIntersections(ray, maxDistance);
         List<GeoPoint> result = new LinkedList<>();
         if (intersections != null) {
             for (GeoPoint geoPoint : intersections)
                 result.add(new GeoPoint(this, geoPoint.point));
+
             return result;
         }
         return null;

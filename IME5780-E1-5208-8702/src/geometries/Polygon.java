@@ -113,7 +113,7 @@ public class Polygon extends Geometry {
 
     @Override
     public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
-        List<GeoPoint> intersection = _plane.findIntersections(ray);
+        List<GeoPoint> intersection = _plane.findIntersections(ray,maxDistance);
         if (intersection == null)
             return null;
         Point3D p0 = ray.getP0();
@@ -133,6 +133,8 @@ public class Polygon extends Geometry {
             if (positive != (sign > 0))
                 return null;
         }
+        if (positive != (sign > 0))
+            return null;
         intersection.get(0).geometry = this;
         return intersection;
     }
