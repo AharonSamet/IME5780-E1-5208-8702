@@ -13,21 +13,22 @@ public class Material {
 
     // ****************************** Constructors *****************************//
 
+
     /**
-     * constructor for all fields
+     * constructor
      *
+     * @param kD         kd
+     * @param kS         ks
+     * @param nShininess number of shininess
      * @param kT         transparency
      * @param kR         reflection
-     * @param kD         dist
-     * @param kS         s
-     * @param nShininess shininess
      */
-    public Material(double kT, double kR, double kD, double kS, int nShininess) {
-        this._kT = kT;
-        this._kR = kR;
-        this._kD = kD;
-        this._kS = kS;
-        this._nShininess = nShininess;
+    public Material(double kD, double kS, int nShininess, double kT, double kR) {
+        _kD = kD;
+        _kS = kS;
+        _nShininess = nShininess;
+        _kT = kT;
+        _kR = kR;
     }
 
     /**
@@ -38,9 +39,16 @@ public class Material {
      * @param nShininess shininess
      */
     public Material(double kD, double kS, int nShininess) {
-        this(0,0,kD,kS,nShininess);
+        this( kD, kS, nShininess, 0.0, 0.0);
     }
 
+    /**
+     * constructor for new material
+     * @param material the material of object
+     */
+    public Material(Material material) {
+        this(material._kD, material._kS, material._nShininess, material._kT, material._kR);
+    }
 
     // ****************************** Getters *****************************//
 

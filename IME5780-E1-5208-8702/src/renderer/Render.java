@@ -64,7 +64,6 @@ public class Render {
         return true;
     }
 
-
     /**
      * from all intersections we need the closest one
      *
@@ -78,10 +77,8 @@ public class Render {
         List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
         if (intersections == null)
             return null;
-
         for (GeoPoint gp : intersections) {
             double distance = ray_p0.distance(gp.point);
-
             if (distance < closestDistance) {
                 closestPoint = gp;
                 closestDistance = distance;
@@ -97,7 +94,6 @@ public class Render {
      * @param points list of points intersection
      * @return the closest point to the camera
      */
-
     private GeoPoint getClosestPoint(List<GeoPoint> points) {
         //initialization closesDistance to be the largest number of a double type
         GeoPoint rtn = null;
@@ -134,7 +130,7 @@ public class Render {
      * @param inRay    ray
      * @param level    parameter of limit times recursive
      * @param k        stop condition
-     * @return
+     * @return the color
      */
     private Color calcColor(GeoPoint geoPoint, Ray inRay, int level, double k) {
         if (level == 1 || k < MIN_CALC_COLOR_K) {
@@ -234,7 +230,6 @@ public class Render {
         return new Ray(point, inRay.getDir(), n);
     }
 
-
     /**
      * this func Calc the intensity in a intersection point
      * with the light sources rays
@@ -274,15 +269,15 @@ public class Render {
     /**
      * Prints a grid on the background of our image
      *
-     * @param _interval The interval between line to line
-     * @param _color    the color for the grid
+     * @param interval The interval between line to line
+     * @param color    the color for the grid
      */
-    public void printGrid(int _interval, java.awt.Color _color) {
+    public void printGrid(int interval, java.awt.Color color) {
         //i = row, j = columns on the image (Nx X Ny)
         for (int i = 0; i < this._imageWriter.getNy(); ++i)
             for (int j = 0; j < this._imageWriter.getNx(); ++j) {
-                if (j % _interval == 0 || i % _interval == 0)
-                    _imageWriter.writePixel(j, i, _color);
+                if (j % interval == 0 || i % interval == 0)
+                    _imageWriter.writePixel(j, i, color);
             }
     }
 

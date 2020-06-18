@@ -1,9 +1,6 @@
 package scene;
 
-import elements.AmbientLight;
-import elements.Camera;
-import elements.DirectionalLight;
-import elements.LightSource;
+import elements.*;
 import geometries.Geometries;
 import geometries.Intersectable;
 import primitives.Color;
@@ -144,13 +141,12 @@ public class Scene {
     /**
      * func to add lights
      *
-     * @param _lights light source
+     * @param lights light source
      */
 
-    public void addLights(LightSource _lights) {
-        if (this._lights == null) {
-            this._lights = new LinkedList<>();
-        }
-        this._lights.add(_lights);
+    public void addLights(LightSource... lights) {
+        if (lights != null)
+            _lights.addAll(Arrays.asList(lights));
     }
 }
+

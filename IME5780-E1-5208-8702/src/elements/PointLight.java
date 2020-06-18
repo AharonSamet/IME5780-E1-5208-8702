@@ -22,12 +22,21 @@ public class PointLight extends Light implements LightSource {
      * @param kL        kl
      * @param kQ        kq
      */
-    public PointLight(Color intensity, Point3D position, double kC, double kL, double kQ) {
+    public PointLight(Color intensity, Point3D position, double kC,double kL,double kQ) {
         super(intensity);
-        this._position = position;
+        this._position =position;
         this._kC = kC;
         this._kL = kL;
         this._kQ = kQ;
+    }
+
+    /**
+     *constructor
+     * @param intensity intensity  of the light
+     * @param position position of the PointLight
+     */
+    public PointLight(Color intensity, Point3D position) {
+        this(intensity, position , 1d, 0d, 0d);
     }
 
     // ****************************** Overrides *****************************//
