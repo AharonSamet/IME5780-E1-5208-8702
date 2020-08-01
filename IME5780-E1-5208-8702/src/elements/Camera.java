@@ -4,6 +4,8 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -16,6 +18,9 @@ public class Camera {
     private Vector vto;
     private Vector vup;
     private Vector vright;
+    private int numOfDOFRays = 1;
+    private double distDOF = 0;
+    private double apertureSize = 0;
 
 
     // ****************************** Constructors *****************************//
@@ -76,6 +81,28 @@ public class Camera {
     }
 
     // ****************************** Functions *****************************//
+    //TODO camera constructor
+
+    /**
+     * func constructRayThroughPixel
+     *
+     * @param nX             pixels on width
+     * @param nY             pixels on height
+     * @param j              Pixel column
+     * @param i              pixel row
+     * @param screenDistance dst from view plane
+     * @param screenWidth    screen width
+     * @param screenHeight   screen height
+     * @return ray list
+     */
+    public List<Ray> constructRaysThroughPixel(int nX, int nY, int j, int i,
+                                               double screenDistance, double screenWidth, double screenHeight) {
+        Ray centerRay = constructRayThroughPixel(nX, nY, j, i, screenDistance, screenWidth, screenHeight);
+        double focalFullDist = Math.sqrt((screenDistance+distDOF)*(screenDistance+distDOF)+apertureSize*apertureSize);
+        Point3D focalPoint = centerRay.getPoint(focalFullDist);
+        return centerRay.focalRays(apertureSize, focalPoint, numOfDOFRays, vup, vright);
+    }
+
 
     /**
      * func constructRayThroughPixel

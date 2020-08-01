@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -81,6 +83,11 @@ public class Ray {
         return isZero(length) ? _p0 : _p0.add(_dir.scale(length));
     }
 
+    public List<Ray> focalRays (double apertureSize, Point3D focalPoint, int mumOfDOF, Vector vUp, Vector vRight){
+        //TODO implement
+
+        return null;
+    }
     // ****************************** Overrides *****************************/
     @Override
     public boolean equals(Object o) {

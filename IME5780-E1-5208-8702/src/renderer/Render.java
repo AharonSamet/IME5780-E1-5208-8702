@@ -114,13 +114,27 @@ public class Render {
     /**
      * Calc the color intensity in a intersection point
      *
-     * @param geoPoint geo point
-     * @param inRay    ray
+     * @param ray    ray
      * @return the color
      */
-    private Color calcColor(GeoPoint geoPoint, Ray inRay) {
-        return calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0).add(
-                _scene.getAmbientLight().getIntensity());
+    private Color calcColor(Ray ray) {
+        GeoPoint geoPoint = findClosestIntersection(ray);
+        // if no have intersection on this ray so paint background
+        if (geoPoint == null)
+            return _scene.getBackground();
+        else {
+            return calcColor(geoPoint, ray, MAX_CALC_COLOR_LEVEL, 1.0).add(
+                    _scene.getAmbientLight().getIntensity());
+        }
+
+    }
+
+    private Color calcColor(List<Ray> rays){
+        Color color = Color.BLACK;
+        for(Ray ray:rays){
+            color = color.add(calcColor(ray));
+        }
+        return color.reduce(rays.size());
     }
 
     /**
@@ -288,7 +302,7 @@ public class Render {
     public void renderImage() {
         Camera camera = _scene.getCamera();
         Intersectable geometries = _scene.getGeometries();
-        java.awt.Color background = _scene.getBackground().getColor();
+
 
         int nX = _imageWriter.getNx();
         int nY = _imageWriter.getNy();
@@ -301,16 +315,9 @@ public class Render {
         for (int i = 0; i < nY; ++i)
             for (int j = 0; j < nX; ++j) {
                 //creating a new ray for every pixel
-                ray = camera.constructRayThroughPixel(nX, nY, j, i, distance, width, height);
-                //List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
-                GeoPoint closestPoint = findClosestIntersection(ray);
-                // if no have intersection on this ray so paint background
-                if (closestPoint == null)
-                    _imageWriter.writePixel(j, i, background);
-                else {
-                    //GeoPoint closestPoint = getClosestPoint(intersectionPoints);
-                    _imageWriter.writePixel(j, i, calcColor(closestPoint, ray).getColor());
-                }
+                List<Ray> rays = camera.constructRaysThroughPixel(nX, nY, j, i, distance, width, height);
+                //GeoPoint closestPoint = getClosestPoint(intersectionPoints);
+                _imageWriter.writePixel(j, i, calcColor(rays).getColor());
             }
     }
 
