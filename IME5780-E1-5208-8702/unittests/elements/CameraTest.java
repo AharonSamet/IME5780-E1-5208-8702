@@ -2,10 +2,14 @@ package elements;
 
 import static org.junit.Assert.*;
 
+import geometries.Sphere;
 import org.junit.Test;
 
 import elements.Camera;
 import primitives.*;
+import renderer.ImageWriter;
+import renderer.Render;
+import scene.Scene;
 
 /**
  * Testing Camera Class
@@ -52,4 +56,8 @@ public class CameraTest {
         assertEquals("Bad ray", new Ray(Point3D.ZERO, new Vector(-2, 0, 10)),
                 camera.constructRayThroughPixel(3, 3, 0, 1, 10, 6, 6));
     }
+
+
+
+
 }

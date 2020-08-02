@@ -1,5 +1,6 @@
 package primitives;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.isZero;
@@ -83,12 +84,37 @@ public class Ray {
         return isZero(length) ? _p0 : _p0.add(_dir.scale(length));
     }
 
-    public List<Ray> focalRays (double apertureSize, Point3D focalPoint, int mumOfDOF, Vector vUp, Vector vRight){
-        //TODO implement
-
-        return null;
+    /**
+     * this func create set of rays
+     *
+     * @param apertureSize aperture Size
+     * @param numOfDOFRays num Of DOF Rays
+     * @param focalPoint focalPoint
+     * @param vUp vec up
+     * @param vRight vec right
+     * @return a list of rays
+     */
+    public List<Ray> focalRays(double apertureSize, int numOfDOFRays, Point3D focalPoint, Vector vUp, Vector vRight) {
+        List<Ray> raysList = new LinkedList<>();
+        raysList.add(this);
+        if (Util.isZero(apertureSize) || numOfDOFRays <= 1)
+            return raysList;
+        int loopLength = (int) Math.sqrt(numOfDOFRays);
+        double factor = apertureSize / loopLength;
+        //first location
+        Point3D p0 = this._p0.add(vUp.scale(-apertureSize / 2)).add(vRight.scale(-apertureSize / 2));
+        for (int i = 1; i <= loopLength; i++) {
+            for (int j = 1; j <= loopLength; j++) {
+                Vector vUpAxis = vUp.scale(i * factor);
+                Vector vRightAxis = vRight.scale(j * factor);
+                Point3D currentPoint = p0.add(vUpAxis).add(vRightAxis);
+                raysList.add(new Ray(currentPoint, focalPoint.subtract(currentPoint)));
+            }
+        }
+        return raysList;
     }
-    // ****************************** Overrides *****************************/
+
+    /****************************** Overrides *****************************/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -18,9 +18,9 @@ public class Camera {
     private Vector vto;
     private Vector vup;
     private Vector vright;
-    private int numOfDOFRays = 1;
-    private double distDOF = 0;
-    private double apertureSize = 0;
+    private int _numOfDOFRays;
+    private double _distDOF;
+    private double _apertureSize;
 
 
     // ****************************** Constructors *****************************//
@@ -33,6 +33,20 @@ public class Camera {
      * @param vup   up vector
      */
     public Camera(Point3D place, Vector vto, Vector vup) {
+        this(place, vto, vup, 1, 0, 0);
+    }
+
+    /**
+     * constructor for camera with params and the params for DOF
+     *
+     * @param place        place of camera
+     * @param vto          forward vector
+     * @param vup          up vector
+     * @param numOfDOFRays num of rays
+     * @param distDOF      distance from camera to focal plane
+     * @param apertureSize size of the aperture
+     */
+    public Camera(Point3D place, Vector vto, Vector vup, int numOfDOFRays, double distDOF, double apertureSize) {
         if (isZero(vto.dotProduct(vup))) {
             this.place = place;
             this.vto = vto.normalized();
@@ -40,6 +54,9 @@ public class Camera {
             vright = new Vector(vto.crossProduct(vup));
         } else
             throw new IllegalArgumentException("Illegal args");
+        _numOfDOFRays = numOfDOFRays;
+        _distDOF = distDOF;
+        _apertureSize = apertureSize;
     }
 
     // ****************************** Getters *****************************//
@@ -81,10 +98,10 @@ public class Camera {
     }
 
     // ****************************** Functions *****************************//
-    //TODO camera constructor
 
     /**
-     * func constructRayThroughPixel
+     * func constructRaysThroughPixel
+     * to create set of rays through pixel (by data and pitagoras)
      *
      * @param nX             pixels on width
      * @param nY             pixels on height
@@ -98,11 +115,10 @@ public class Camera {
     public List<Ray> constructRaysThroughPixel(int nX, int nY, int j, int i,
                                                double screenDistance, double screenWidth, double screenHeight) {
         Ray centerRay = constructRayThroughPixel(nX, nY, j, i, screenDistance, screenWidth, screenHeight);
-        double focalFullDist = Math.sqrt((screenDistance+distDOF)*(screenDistance+distDOF)+apertureSize*apertureSize);
+        double focalFullDist = Math.sqrt((_distDOF) * (_distDOF) + _apertureSize * _apertureSize);
         Point3D focalPoint = centerRay.getPoint(focalFullDist);
-        return centerRay.focalRays(apertureSize, focalPoint, numOfDOFRays, vup, vright);
+        return centerRay.focalRays(_apertureSize, _numOfDOFRays, focalPoint, vup, vright);
     }
-
 
     /**
      * func constructRayThroughPixel

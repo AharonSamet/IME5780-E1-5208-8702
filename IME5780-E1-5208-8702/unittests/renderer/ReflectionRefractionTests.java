@@ -105,12 +105,12 @@ public class ReflectionRefractionTests {
 	}
 
 	/**
-	 * Produce a picture of a two triangles with 4 spheres in varios colors
+	 * Produce a picture of a two triangles with 4 spheres in various colors
 	 */
 	@Test
 	public void OurImage() {
 		Scene scene = new Scene("Test scene");
-		scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+		scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0),9,1050,50));
 		scene.setDistance(1000);
 		scene.setBackground(Color.BLACK);
 		scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
@@ -121,18 +121,17 @@ public class ReflectionRefractionTests {
 				new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
 						new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
 				new Sphere(new Color(java.awt.Color.blue), new Material(0.2, 0.2, 30, 0.6, 0), // )
-						30, new Point3D(60, -50, 50)),
+						30, new Point3D(60, -50, 0)),
 				new Sphere(new Color(java.awt.Color.black), new Material(0.2, 0.2, 60, 0.5, 0.2), // )
-						28, new Point3D(-20, 30, 50)),
+						28, new Point3D(-20, 30, -10)),
 				new Sphere(new Color(java.awt.Color.green), new Material(0.2, 0.2, 20, 0.1, 0.2), // )
-						10, new Point3D(-20, 30, 20)),
+						10, new Point3D(-50, 80, 100)),
 				new Sphere(new Color(java.awt.Color.red), new Material(0.2, 0.2, 90, 0, 0.6), // )
 						33, new Point3D(-50, -50, 50)));
 
 		scene.addLights(
 				new SpotLight(new Color(700, 400, 400), //
 						new Point3D(50, -50, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7),
-				new PointLight(new Color(127, 255, 212), new Point3D(-400, 120, 50)),
 				new SpotLight(new Color(100, 250, 100),
 						new Point3D(-20, 20, 100), new Vector(-1, 1, 4), 1, 0.00001, 0.000005));
 
