@@ -114,7 +114,7 @@ public class Render {
     /**
      * Calc the color intensity in a intersection point
      *
-     * @param ray    ray
+     * @param ray ray
      * @return the color
      */
     private Color calcColor(Ray ray) {
@@ -129,9 +129,15 @@ public class Render {
 
     }
 
-    private Color calcColor(List<Ray> rays){
+    /**
+     * calc the average of the colors in focal point
+     *
+     * @param rays rays
+     * @return the average
+     */
+    private Color calcColor(List<Ray> rays) {
         Color color = Color.BLACK;
-        for(Ray ray:rays){
+        for (Ray ray : rays) {
             color = color.add(calcColor(ray));
         }
         return color.reduce(rays.size());
